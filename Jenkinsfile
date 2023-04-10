@@ -17,7 +17,7 @@
 
             stage('Deploy') {
                 steps {
-                    sh 'echo not yet...'
+                    sh 'docker ps'
                 }
             }
         }
