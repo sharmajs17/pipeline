@@ -1,6 +1,6 @@
  pipeline {
         agent {
-            docker-compose { image 'myimage' }
+            docker { image 'myimage' }
         }
         stages {
             stage('Build') {
