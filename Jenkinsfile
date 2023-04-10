@@ -1,24 +1,37 @@
  pipeline {
-        agent {
-            docker { image 'shahharshil/python1' }
+  agent any
+  
+  environment {
+    DOCKER_IMAGE = 'shahharshil/python2'
+  }
+  
+  stages {
+    stage('Build') {
+      steps {
+        script {
+          docker.build shahharshil/python2
         }
-        stages {
-            stage('Build') {
-                steps {
-                    sh 'docker-compose build'
-                }
-            }
-
-            stage('Test') {
-                steps {
-                    sh 'docker-compose up -d'
-                }
-            }
-
-            stage('Deploy') {
-                steps {
-                    sh 'docker ps'
-                }
-            }
-        }
+      }
     }
+    
+    stage('Push') {
+      steps {
+        script {
+          docker.withRegistry('shahharshil/python2', 'pipeline') {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+    
+    stage('Deploy') {
+      steps {
+        script {
+          sh "docker pull ${shahharshil/python2}"
+          sh "docker run -d -p 8085:80 ${shahharshil/python2}"
+        }
+      }
+    }
+  }
+}
+
