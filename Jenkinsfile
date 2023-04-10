@@ -1,24 +1,21 @@
- pipeline {
-        agent {
-            docker { image 'shahharshil/python1' } 
+pipeline {
+    agent docker
+    stages {
+        stage('build') {
+            agent {
+                docker { image 'shahharshil/python1' }
+            }
+            steps {
+                sh 'docker-compose build'
+            }
         }
-        stages {
-            stage('Build') {
-                steps {
-                    sh 'docker-compose build'
-                }
+        stage('build') {
+            agent {
+                docker { image 'shahharshil/python2' }
             }
-
-            stage('Test') {
-                steps {
-                    sh 'docker-compose up -d'
-                }
-            }
-
-            stage('Deploy') {
-                steps {
-                    sh 'docker ps'
-                }
+            steps {
+                sh 'docker-compose up -d'
             }
         }
     }
+}
