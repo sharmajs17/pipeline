@@ -1,6 +1,6 @@
  pipeline {
         agent {
-            docker { image 'shahharshil/myimage' } 
+            docker { image 'shahharshil/python1' } 
         }
         stages {
             stage('Build') {
