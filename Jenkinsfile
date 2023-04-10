@@ -2,14 +2,14 @@
   agent any
   
   environment {
-    DOCKER_IMAGE = 'shahharshil/python2'
+    DOCKER_IMAGE = 'shahharshil/python2:latest'
   }
   
   stages {
     stage('Build') {
       steps {
         script {
-          docker.build shahharshil/python2
+          docker.build(DOCKER_IMAGE)
         }
       }
     }
@@ -17,7 +17,7 @@
     stage('Push') {
       steps {
         script {
-          docker.withRegistry('shahharshil/python2', 'pipeline') {
+          docker.withRegistry('shahharshil/python2:latest', 'pipeline') {
             dockerImage.push()
           }
         }
@@ -27,8 +27,8 @@
     stage('Deploy') {
       steps {
         script {
-          sh "docker pull ${shahharshil/python2}"
-          sh "docker run -d -p 8085:80 ${shahharshil/python2}"
+          sh "docker pull ${DOCKER_IMAGE}"
+          sh "docker run -d -p 8085:80 ${DOCKER_IMAGE}"
         }
       }
     }
