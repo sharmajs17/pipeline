@@ -2,9 +2,6 @@
         agent {
             docker { image 'shahharshil/myimage' } 
         }
-	agent {
-	    docker { image 'shahharshil/python'  }
-	}
         stages {
             stage('Build') {
                 steps {
