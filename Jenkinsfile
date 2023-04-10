@@ -1,6 +1,6 @@
  pipeline {
         agent {
-            docker { image 'shahharshil/myimage:tagname' }
+            docker { image 'myimage' }
         }
         stages {
             stage('Build') {
