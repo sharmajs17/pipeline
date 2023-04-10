@@ -3,11 +3,10 @@ pipeline{
    stages{ 
       stage('build image') {
          steps{
-            docker-compose build
-
+               docker-compose build
 	stage('docker-compose up') {		
 	 steps {
-		docker-compose up -d
+	       docker-compose up -d
 	      }	
            }
          }
