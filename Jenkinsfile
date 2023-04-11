@@ -27,8 +27,8 @@
     stage('Deploy') {
       steps {
         script {
-          sh "docker-compose build ${DOCKER_IMAGE}"
-          sh "docker-compose up -d ${DOCKER_IMAGE}"
+          sh "docker pull ${DOCKER_IMAGE}"
+          sh "docker run -d -p 8085:80 ${DOCKER_IMAGE}"
         }
       }
     }
