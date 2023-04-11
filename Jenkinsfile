@@ -22,3 +22,4 @@ pipeline {
 	sh 'docker push shahharshil/myimage'
     }
   }
+}
