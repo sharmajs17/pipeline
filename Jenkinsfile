@@ -2,7 +2,7 @@
   agent any
   
   environment {
-    DOCKER_IMAGE = 'shahharshil/python2:latest'
+    DOCKER_IMAGE = 'shahharshil/pipeline:latest'
   }
   
   stages {
@@ -17,7 +17,7 @@
     stage('Push') {
       steps {
         script {
-          docker.withRegistry('shahharshil/python2:latest', 'pipeline') {
+          docker.withRegistry('shahharshil/pipeline:latest', 'pipeline') {
             dockerImage.push()
           }
         }
