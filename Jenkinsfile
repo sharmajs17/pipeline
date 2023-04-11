@@ -9,27 +9,18 @@ pipeline {
     stage('Build') {
       steps {
 	sh 'docker build -t myimage:latest .'
-        script {	
-          docker.build(myimage:latest)
-        }
       }
     }
     
-    stage('Push') {
+    stage('tag') {
       steps {
-	sh 'docker tag myimage:latest shahharshil/myimage'
-            dockerImage.push()
-          }
+	sh 'docker tag myimage:latest shahharshil/myimage
         }
       }
-    stage('Deploy') {
+    stage('push') {
       steps {
 	sh 'docker push shahharshil/myimage'
-        script {
-        }
       }
     }
   }
-
-
 
