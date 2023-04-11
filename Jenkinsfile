@@ -20,6 +20,5 @@ pipeline {
     stage('push') {
       steps {
 	sh 'docker push shahharshil/myimage'
-      }
     }
   }
