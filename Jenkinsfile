@@ -14,7 +14,7 @@ pipeline {
     
     stage('tag') {
       steps {
-	sh 'docker tag myimage:latest shahharshil/myimage
+	sh 'docker tag myimage:latest shahharshil/myimage'
         }
       }
     stage('push') {
