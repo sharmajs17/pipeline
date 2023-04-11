@@ -2,13 +2,14 @@
   agent any
   
   environment {
-    DOCKER_IMAGE = 'shahharshil/pipeline:latest'
+    DOCKERHUB_CREDENTIALS= credentials = 'pipeline'
   }
   
   stages {
     stage('Build') {
       steps {
         script {
+          sh "docker build -t myimage:latest ."	
           docker.build(DOCKER_IMAGE)
         }
       }
@@ -16,6 +17,7 @@
     
     stage('Push') {
       steps {
+          sh "docker tag myimage:latest shahharshil/myimage:latest"
         script {
           docker.withRegistry('shahharshil/pipeline:latest', 'pipeline') {
             dockerImage.push()
@@ -27,8 +29,7 @@
     stage('Deploy') {
       steps {
         script {
-          sh "docker pull ${DOCKER_IMAGE}"
-          sh "docker run -d -p 8085:80 ${DOCKER_IMAGE}"
+          sh "docker push shahharshil/myimage:latest"
         }
       }
     }
